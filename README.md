@@ -23,3 +23,6 @@ It also comes with many fonts and styling options that can be combined as desire
 - Hide commands messages (on/off)
 - !refreshoverlay to make newly added emotes appear (mods only)
 
+## Sef hosting
+
+Can be self hosted, using [fChat-server](https://github.com/Fedot-Compot/fChat-server) as web server and api for Twitch API authentication.
