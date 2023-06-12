@@ -34,7 +34,7 @@ function escapeHtml(message) {
         .replace(/(>)(?!\()/g, "&gt;");
 }
 async function authenticateToTwitch() {
-    ({ access_token: token, client_id: clientid} = await (await fetch("/auth")).json())
+    ({ access_token: token, client_id: clientid} = await (await fetch("../auth")).json())
 }
 
 function myAPI(url) {
