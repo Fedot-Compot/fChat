@@ -314,20 +314,17 @@ Chat = {
 
             // Load badges
             myAPI('/chat/badges/global').then(function (global) {
-                console.log(global);
                 global.data.forEach(badge => {
                     badge.versions.forEach(version => {
                         Chat.info.badges[`${badge.set_id}:${version.id}`] = version.image_url_4x;
                     });
                 });
                 myAPI('/chat/badges?broadcaster_id=' + encodeURIComponent(Chat.info.channelID)).then(function (channel) {
-
                     channel.data.forEach(badge => {
                         badge.versions.forEach(version => {
                             Chat.info.badges[`${badge.set_id}:${version.id}`] = version.image_url_4x;
                         });
                     });
-                    console.log(Chat.info.badges);
                     $.getJSON('https://api.frankerfacez.com/v1/_room/id/' + encodeURIComponent(Chat.info.channelID)).done(function (res) {
                         if (res.room.moderator_badge) {
                             Chat.info.badges['moderator:1'] = 'https://cdn.frankerfacez.com/room-badge/mod/' + Chat.info.channel + '/4/rounded';
@@ -700,11 +697,11 @@ Chat = {
         $(document).prop('title', title + Chat.info.channel);
 
         Chat.load(function () {
-            console.log('jChat: Connecting to IRC server...');
+            console.log('fChat: Connecting to IRC server...');
             var socket = new ReconnectingWebSocket('wss://irc-ws.chat.twitch.tv', 'irc', { reconnectInterval: 2000 });
 
             socket.onopen = function () {
-                console.log('jChat: Connected');
+                console.log('fChat: Connected');
                 socket.send('PASS blah\r\n');
                 socket.send('NICK justinfan' + Math.floor(Math.random() * 99999) + '\r\n');
                 socket.send('CAP REQ :twitch.tv/commands twitch.tv/tags\r\n');
@@ -712,7 +709,7 @@ Chat = {
             };
 
             socket.onclose = function () {
-                console.log('jChat: Disconnected');
+                console.log('fChat: Disconnected');
             };
 
             socket.onmessage = function (data) {
@@ -720,13 +717,12 @@ Chat = {
                     if (!line) return;
                     var message = window.parseIRC(line);
                     if (!message.command) return;
-                    console.log(message);
                     switch (message.command) {
                         case "PING":
                             socket.send('PONG ' + message.params[0]);
                             return;
                         case "JOIN":
-                            console.log('jChat: Joined channel #' + Chat.info.channel);
+                            console.log('fChat: Joined channel #' + Chat.info.channel);
                             return;
                         case "CLEARMSG":
                             if (message.tags) Chat.clearMessage(message.tags['target-msg-id']);
@@ -749,7 +745,7 @@ Chat = {
                                 });
                                 if (flag) {
                                     Chat.loadEmotes(Chat.info.channelID);
-                                    console.log('jChat: Refreshing emotes...');
+                                    console.log('fChat: Refreshing emotes...');
                                     return;
                                 }
                             }
