@@ -46,6 +46,12 @@ function myAPI(url) {
     }).then(res => res.json());
 }
 
+window.onload = () => {
+    if('background_color' in $.QueryString){
+        document.querySelector("body").style.backgroundColor = $.QueryString.background_color;    
+    }
+}
+
 Chat = {
     info: {
         channel: null,

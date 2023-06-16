@@ -85,6 +85,14 @@
                         <input type="number" name="msgdelayms" autocomplete="off" value="">
                         <label for="msgdelayms">Msg Delay [ms]</label>
                     </div>
+                    <div class="form_row left">
+                        <input type="color" name="background-color" autocomplete="off" value="#000000">
+                        <label for="background-color">Background color</label>
+                    </div>
+                    <div class="form_row left">
+                        <input type="number" name="background-transparancy" autocomplete="off" value="0">
+                        <label for="background-transparancy">Background transparancy</label>
+                    </div>
                 </div>
                 <div class="form_col">
                     <div class="form_row right">
@@ -114,7 +122,7 @@
                     <div class="form_row right">
                         <label for="fade">Fade</label>
                         <input type="text" name="fade" value="30" class="short hidden"><span id="fade_seconds" class="hidden">sec</span>
-                        <input type="checkbox" name="fade_bool">
+                        <input type="checkbox" id="fade_bool">
                     </div>
                     <div class="form_row right">
                         <label for="small_caps">Caps</label>

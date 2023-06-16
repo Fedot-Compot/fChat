@@ -56,6 +56,12 @@ function capsUpdate(event) {
     }
 }
 
+function backgroundUpdate(event) {
+    let color = backroundColor.value;
+    let transparancy = Math.max(Math.min(100, +backroundTransparancy.value)).toString(16).padStart(2, "0");
+    $example.css("background-color", color+transparancy);
+}
+
 function generateURL(event) {
     event.preventDefault();
 
@@ -75,7 +81,8 @@ function generateURL(event) {
         msgdelayms: $msgdelayms.val(),
         animate: $animate.is(':checked'),
         fade: ($fade_bool.is(':checked') ? $fade.val() : false),
-        small_caps: $small_caps.is(':checked')
+        small_caps: $small_caps.is(':checked'),
+        background_color: backroundColor.value + Math.max(Math.min(100, +backroundTransparancy.value)).toString(16).padStart(2, "0")
     };
 
     const params = encodeQueryData(data);
@@ -155,6 +162,8 @@ const $size = $("select[name='size']");
 const $font = $("select[name='font']");
 const $stroke = $("select[name='stroke']");
 const $shadow = $("select[name='shadow']");
+const backroundColor = document.querySelector("input[name='background-color']");
+const backroundTransparancy = document.querySelector("input[name='background-transparancy']");
 const $brightness = $("#brightness");
 const $example = $('#example');
 const $result = $("#result");
@@ -171,6 +180,8 @@ $small_caps.change(capsUpdate);
 $badges.change(badgesUpdate);
 $generator.submit(generateURL);
 $brightness.click(changePreview);
+backroundColor.addEventListener("input", backgroundUpdate)
+backroundTransparancy.addEventListener("input", backgroundUpdate);
 $url.click(copyUrl);
 $alert.click(showUrl);
 $reset.click(resetForm);
