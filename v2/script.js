@@ -650,23 +650,39 @@ Chat = {
             $message.html(message);
 
             // Writing zero-width emotes
-            messageNodes = $message.children();
+            messageNodes = $message.contents();
+            let emoteSection = false;
             let zwSection = false;
+            let prevEmoteIndex = 0;
+            let zwCount = 0;
+            let emoteCount = 0;
             let $container;
             messageNodes.each(function (i) {
+                if(this.nodeValue == " ") return;
+                let isEmote = $(this).hasClass("emote");
                 let isZw = $(this).data('zw');
-                if (!zwSection && isZw) {
+                emoteSection = isEmote;
+
+                if(emoteSection) ++emoteCount;
+                else emoteCount = 0;
+                if (emoteSection && isZw && !zwSection) {
                     zwSection = true;
+                    zwCount = 0;
                     $container = $('<span></span>');
                     $container.addClass('zero-width_container');
-                    $(this).addClass('zero-width');
                     $(this).before($container);
-                    $container.append(messageNodes[i - 1], this);
+                    if(emoteCount > 1) {
+                        $(this).addClass('zero-width');
+                        $container.append(messageNodes[prevEmoteIndex], this);
+                    } else $container.append(this);
                 }else if(zwSection && isZw){
+                    ++zwCount;
                     $(this).addClass('zero-width');
-                    $(this).before($container);
-                    $container.append(messageNodes[i - 1], this);
-                }else if(zwSection && !isZw) zwSection = false
+                    $container.append(this);
+                }else if(zwSection && !isZw){
+                    zwSection = false;
+                }
+                if(isEmote) prevEmoteIndex = i;
             });
             $message.html($message.html().trim());
             $chatLine.append($message);
