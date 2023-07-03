@@ -1,4 +1,4 @@
-# fChat
+# fChat [OLD] -> [fChat-server](https://github.com/Fedot-Compot/fChat-server)
 
 **fChat** is a fork of **fChat** an overlay that allows you to show your Twitch chat on screen with OBS, XSplit, and any other streaming software that supports browser sources.
 
@@ -8,7 +8,7 @@ You have many options to customize your chat, like enabling a smooth animation f
 If you have a chat full of !gamble addicts, you can choose to hide bots and commands messages.
 It also comes with many fonts and styling options that can be combined as desired.
 
-### The app is up and running on the [**website**](https://frodoshur.net/).
+### The app is up and running on the [**website**](https://fchat.frodoshur.net/).
 
 ## Features
 
@@ -25,4 +25,6 @@ It also comes with many fonts and styling options that can be combined as desire
 
 ## Sef hosting
 
-Can be self hosted, using [fChat-server](https://github.com/Fedot-Compot/fChat-server) as web server and api for Twitch API authentication.
+Can be self hosted, using [fChat-server](https://github.com/Fedot-Compot/fChat-server) which includes web server and api for Twitch API authentication.
+
+Beware that it requires a Twitch account and .env variables
